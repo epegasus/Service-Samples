@@ -30,6 +30,7 @@
 	-> Broadcast of intent
 			* If a BroadcastReceiver hasn't finished executing within a set amount of time.
 			  If the app has any activity in the foreground, this timeout is 5 seconds.
+			  
 ### Enable background ANR dialogs
 	Android shows ANR dialogs for apps that take too long to process the broadcast message only 
 	if Show all ANRs is enabled in the device’s Developer options. For this reason, background ANR 
@@ -37,9 +38,46 @@
 	
 	
 ### Types of Services
+	-> Foreground Service	(Noticeable to the user) e.g. Audio Player
+	-> Background Service	(Hidden) e.g. Cleaning Storage
+	-> Bound Service 		(Binded with an application component)
 	
+	Bound service can be binded with multiple components. It will automatically be get killed when all components unbind it.
+	A bound service runs only as long as another application component is bound to it.
 	
+#### Choosing b/w thread or service?	
 	
+#### NOTE (Work Manager)
+	In many cases, using WorkManager is preferable to using foreground services directly.	
+	
+### Steps
+ 
+#### Step # 1
+	Add <service> tag in Manifest
+	
+	```
+	<manifest ... >
+  		...
+ 	 	<application ... >
+			<service android:name=".ExampleService" />
+			...
+		</application>
+	</manifest>
+	```
+ 
+#### Step # 2
+	Extend class with Service
+	
+	```
+	class HelloService : Service() {
+		...
+	}
+	```
+	
+ 	1) onStartCommand()
+	2) onBind()
+	3) onCreate()
+	4) onDestroy()
 	
 	
 	
