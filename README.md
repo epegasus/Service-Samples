@@ -52,10 +52,8 @@
 	
 ### Steps
  
-#### Step # 1
-	Add <service> tag in Manifest
+#### Step # 1 -> Add <service> tag in Manifest
 	
-	```
 	<manifest ... >
   		...
  	 	<application ... >
@@ -63,24 +61,32 @@
 			...
 		</application>
 	</manifest>
-	```
  
-#### Step # 2
-	Extend class with Service
+#### Step # 2 -> Extend class with Service
 	
-	```
 	class HelloService : Service() {
 		...
 	}
-	```
 	
- 	1) onStartCommand()
+#### Step # 3 -> Life Cycles
+	
+ 	1) onStartCommand() 
+		This method will be triggered when 'startService()' is called. To top a service, call `stopSelf()` or `stopService()`
 	2) onBind()
+		This method will be triggered when 'bindService()' is called. It will stop service, once all components are unbouned. 
+	 	You must always implement this method `IBinder`, however, if you don't want to allow binding, you should return null.
 	3) onCreate()
+		This method will be triggered when the service is initially created (before it calls either onStartCommand() or onBind()).
+		If the service is already running, this method is not called.
 	4) onDestroy()
+		The system invokes this method when the service is no longer used and is being destroyed. Your service should implement 
+		this to clean up any resources such as threads, registered listeners, or receivers. This is the last call that the service receives.
 	
 	
-	
+### Service get auto-stops 
+	-> Low memory
+	-> Cannot get killed if user is interacting to it's binded component
+	-> Foreground services are rarely get killed.
 	
 	
 	
