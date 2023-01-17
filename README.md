@@ -40,10 +40,20 @@
 ### Types of Services
 	-> Foreground Service	(Noticeable to the user) e.g. Audio Player
 	-> Background Service	(Hidden) e.g. Cleaning Storage
-	-> Bound Service 		(Binded with an application component)
+	-> Bound Service 	(Binded with an application component)
 	
 	Bound service can be binded with multiple components. It will automatically be get killed when all components unbind it.
 	A bound service runs only as long as another application component is bound to it.
+	
+    IntentService 	
+    	-> Extent to base class
+	-> It will not work well starting with Android 8 Oreo, due to the introduction of Background execution limits.
+	-> This class was deprecated in API level 30.
+	-> Use `JobIntentService` instead
+	
+    JobIntentService
+    	-> Also deprecated, use work Manager.
+				
 	
 #### Choosing b/w thread or service?	
 	
@@ -87,6 +97,10 @@
 	-> Low memory
 	-> Cannot get killed if user is interacting to it's binded component
 	-> Foreground services are rarely get killed.
+
+### WARNING
+	After you publish your application, leave this name unchanged to avoid the risk of 
+	breaking code due to dependence on explicit intents to start or bind the service.
 	
 	
-	
+
