@@ -123,5 +123,6 @@ Result from Service
 		and deliver it to the service in the Intent that starts the service.
 			
 ### LifeCycle
-	![lifecycle](https://user-images.githubusercontent.com/100923337/213107630-204ba81a-98b4-45de-9d25-3fbc36e51084.png)
+
+![lifecycle](https://user-images.githubusercontent.com/100923337/213107630-204ba81a-98b4-45de-9d25-3fbc36e51084.png)
 
