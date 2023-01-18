@@ -42,9 +42,9 @@
 	-> Background Service	(Hidden) e.g. Cleaning Storage
 	-> Bound Service 	(Binded with an application component)
 	
-	Bound service can be binded with multiple components. It will automatically be get killed when all components unbind it.
-	A bound service runs only as long as another application component is bound to it.
-	It can be binded with already running service. (music player {current song}) and stopSelf won't work, untill unbind.
+	> Bound service can be binded with multiple components. It will automatically be get killed when all components unbind it.
+	> A bound service runs only as long as another application component is bound to it.
+	> It can be binded with already running service. (music player {current song}) and stopSelf won't work, untill unbind.
 	
     IntentService 	
     	-> Extent to base class
