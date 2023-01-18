@@ -44,6 +44,7 @@
 	
 	Bound service can be binded with multiple components. It will automatically be get killed when all components unbind it.
 	A bound service runs only as long as another application component is bound to it.
+	It can be binded with already running service. (music player {current song}) and stopSelf won't work, untill unbind.
 	
     IntentService 	
     	-> Extent to base class
@@ -92,15 +93,35 @@
 		The system invokes this method when the service is no longer used and is being destroyed. Your service should implement 
 		this to clean up any resources such as threads, registered listeners, or receivers. This is the last call that the service receives.
 	
-	
 ### Service get auto-stops 
 	-> Low memory
 	-> Cannot get killed if user is interacting to it's binded component
 	-> Foreground services are rarely get killed.
-
+	
+#### How to save?
+	There are 3 return types in `onStartCommand()`
+	1) START_STICKY:		(Will restart with null intent)
+	2) START_NOT_STICKY:		(Will not restart)   e.g. for alarm closing
+	3) START_REDELIVER_INTENT:	(Will restart with previous intent)
+	
 ### WARNING
 	After you publish your application, leave this name unchanged to avoid the risk of 
 	breaking code due to dependence on explicit intents to start or bind the service.
+		
+`startForeground()`	
+		This method creates a background service, but the method signals to the system 
+		that the service will promote itself to the foreground. Once the service has been created, 
+		the service must call its startForeground() method within five seconds. (OTHERWISE ANR)
+
+`startService()`	
+		The startService() method returns immediately, and the Android system 
+		calls the service's onStartCommand() method. If the service isn't already running, 
+		the system first calls onCreate(), and then it calls onStartCommand().
 	
-	
+Result from Service
+		Client that starts the service can create a PendingIntent for a broadcast (with getBroadcast()) 
+		and deliver it to the service in the Intent that starts the service.
+			
+### LifeCycle
+	![image](https://user-images.githubusercontent.com/100923337/213107630-204ba81a-98b4-45de-9d25-3fbc36e51084.png)
 
