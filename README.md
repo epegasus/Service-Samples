@@ -135,3 +135,26 @@
 
 ![lifecycle](https://user-images.githubusercontent.com/100923337/213107630-204ba81a-98b4-45de-9d25-3fbc36e51084.png)
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+							Foreground Service
+
+	Example:	**Music Player**, **Fitness App (Walking Distance)**
+	
+	1) The system waits 10 seconds before showing the notification associated with a foreground service 
+	   (**Android 12 or higher**)
+		It can be shown immediately in following cases
+		-> Action Buttons
+		-> ForegroundServiceType: `mediaPlayback`, `mediaProjection`, or `phoneCall`
+		-> Notification.Builder setForegroundServiceBehavior (int behavior)
+	
+	2) Starting in Android 13 (API level 33), users can dismiss the notification associated with a foreground 
+	   service by default by swipe. For preventing this: set `true` to `setOngoing()` in `Notification.Builder`
+	
+	3) Add permission. **Android 9 or higher must request** else **Security Exception**
+		<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+	   Note: It's a normal permission
+	
+	4) Notification must be or equal to **PRIORITY_LOW**
+
