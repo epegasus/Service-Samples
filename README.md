@@ -63,7 +63,7 @@
 	
 ### Steps
  
-#### Step # 1 -> Add <service> tag in Manifest
+#### Step # 1 Add <service> tag in Manifest
 	
 	<manifest ... >
   		...
@@ -79,7 +79,7 @@
 		...
 	}
 	
-#### Step # 3 -> Life Cycles
+#### Step # 3 Life Cycles
 	
  	1) onStartCommand() 
 		This method will be triggered when 'startService()' is called. To top a service, call `stopSelf()` or `stopService()`
@@ -94,12 +94,15 @@
 		this to clean up any resources such as threads, registered listeners, or receivers. This is the last call that the service receives.
 	
 ### Service get auto-stops 
+	
 	-> Low memory
 	-> Cannot get killed if user is interacting to it's binded component
 	-> Foreground services are rarely get killed.
 	
 #### How to save?
+	
 	There are 3 return types in `onStartCommand()`
+	
 	1) START_STICKY:		(Will restart with null intent)
 	2) START_NOT_STICKY:		(Will not restart)   e.g. for alarm closing
 	3) START_REDELIVER_INTENT:	(Will restart with previous intent)
@@ -109,16 +112,19 @@
 	breaking code due to dependence on explicit intents to start or bind the service.
 		
 `startForeground()`	
+	
 		This method creates a background service, but the method signals to the system 
 		that the service will promote itself to the foreground. Once the service has been created, 
 		the service must call its startForeground() method within five seconds. (OTHERWISE ANR)
 
-`startService()`	
+`startService()`
+	
 		The startService() method returns immediately, and the Android system 
 		calls the service's onStartCommand() method. If the service isn't already running, 
 		the system first calls onCreate(), and then it calls onStartCommand().
 	
-Result from Service
+**Result from Service**
+	
 		Client that starts the service can create a PendingIntent for a broadcast (with getBroadcast()) 
 		and deliver it to the service in the Intent that starts the service.
 			
