@@ -172,7 +172,7 @@
     It shows a list of apps that are currently running a foreground service.
     This list is labeled Active apps. Next to each app is a Stop button.
 	
-![image](https://user-images.githubusercontent.com/100923337/213171999-b9df1630-11f6-4e11-b2bd-de5f93750107.png)
+![fgs-manager](https://user-images.githubusercontent.com/100923337/213176049-f3d3f71f-c592-4414-a12f-8051f2ead051.png)
 	
 ### Declare foreground service types
 	
