@@ -1,5 +1,6 @@
 package dev.epegasus.servicesamples
 
+import android.app.ActivityManager
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -9,6 +10,7 @@ import dev.epegasus.servicesamples.databinding.ActivityMainBinding
 import dev.epegasus.servicesamples.services.background.MyBackgroundService
 import dev.epegasus.servicesamples.services.foreground.MyForegroundService
 import dev.epegasus.servicesamples.services.lifecycle.MyServiceLifeCycle
+
 
 const val TAG = "MyTag"
 
@@ -50,5 +52,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBoundService() {
 
+    }
+
+    fun isServiceRunning(serviceClassName: String?): Boolean {
+        val activityManager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        for (runningServiceInfo in activityManager.getRunningServices(Int.MAX_VALUE)) {
+            if (runningServiceInfo.service.className == serviceClassName) {
+                return true
+            }
+        }
+        return false
     }
 }
