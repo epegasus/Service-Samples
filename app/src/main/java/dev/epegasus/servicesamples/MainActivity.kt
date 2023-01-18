@@ -11,7 +11,6 @@ import dev.epegasus.servicesamples.services.background.MyBackgroundService
 import dev.epegasus.servicesamples.services.foreground.MyForegroundService
 import dev.epegasus.servicesamples.services.lifecycle.MyServiceLifeCycle
 
-
 const val TAG = "MyTag"
 
 class MainActivity : AppCompatActivity() {
