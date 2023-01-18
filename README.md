@@ -138,9 +138,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-							Foreground Service
+							### Foreground Service
 
-	Example:	**Music Player**, **Fitness App (Walking Distance)**
+	Example:	Music Player, Fitness App (Walking Distance)
 	
 	1) The system waits 10 seconds before showing the notification associated with a foreground service 
 	   (**Android 12 or higher**)
@@ -152,9 +152,34 @@
 	2) Starting in Android 13 (API level 33), users can dismiss the notification associated with a foreground 
 	   service by default by swipe. For preventing this: set `true` to `setOngoing()` in `Notification.Builder`
 	
-	3) Add permission. **Android 9 or higher must request** else **Security Exception**
+	3) Add permission. *Android 9 or higher must request) else **Security Exception**
 		<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 	   Note: It's a normal permission
 	
-	4) Notification must be or equal to **PRIORITY_LOW**
+	4) Notification must be or equal to PRIORITY_LOW
 
+	5) It can be called from background, except for few cases 
+		e.g. FCM high priority, bubble, notification, widget, alarm, devices current input method, etc (13 points)
+           [https://developer.android.com/guide/components/foreground-services#background-start-restriction-exemptions]
+	
+	6) To Stop a foreground, we can call stopForeground(parameter)
+     		-> STOP_FOREGROUND_DETACH: Notification will remain after killing foreground service.
+     		-> STOP_FOREGROUND_REMOVE: Notification will be removed as well.
+	7) To stop a service, we can call stopSelf()
+
+### Foreground Services (FGS) Task Manager
+	
+	It shows a list of apps that are currently running a foreground service.
+	This list is labeled Active apps. Next to each app is a Stop button.
+	
+![image](https://user-images.githubusercontent.com/100923337/213171999-b9df1630-11f6-4e11-b2bd-de5f93750107.png)
+	
+### Declare foreground service types
+	
+	
+        <service
+            android:name=".services.foreground.MyForegroundService"
+            android:foregroundServiceType="location"
+		 />
+	
+	
