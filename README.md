@@ -138,9 +138,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-							### Foreground Service
+							 Foreground Service
 
-	Example:	Music Player, Fitness App (Walking Distance)
+    Example:	Music Player, Fitness App (Walking Distance)
 	
 	1) The system waits 10 seconds before showing the notification associated with a foreground service 
 	   (**Android 12 or higher**)
@@ -169,8 +169,8 @@
 
 ### Foreground Services (FGS) Task Manager
 	
-	It shows a list of apps that are currently running a foreground service.
-	This list is labeled Active apps. Next to each app is a Stop button.
+    It shows a list of apps that are currently running a foreground service.
+    This list is labeled Active apps. Next to each app is a Stop button.
 	
 ![image](https://user-images.githubusercontent.com/100923337/213171999-b9df1630-11f6-4e11-b2bd-de5f93750107.png)
 	
@@ -181,5 +181,3 @@
             android:name=".services.foreground.MyForegroundService"
             android:foregroundServiceType="location"
 		 />
-	
-	
