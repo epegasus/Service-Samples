@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import dev.epegasus.servicesamples.databinding.ActivityMainBinding
 import dev.epegasus.servicesamples.services.background.MyBackgroundService
 import dev.epegasus.servicesamples.services.foreground.MyForegroundService
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initForegroundService() {
         val intent = Intent(this, MyForegroundService::class.java)
-        startService(intent)
+        ContextCompat.startForegroundService(this, intent)
     }
 
     private fun initBoundService() {
