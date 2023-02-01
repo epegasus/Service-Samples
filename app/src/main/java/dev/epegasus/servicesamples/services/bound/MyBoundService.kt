@@ -1,23 +1,26 @@
-package dev.epegasus.servicesamples.services.foreground
+package dev.epegasus.servicesamples.services.bound
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
+import android.os.Binder
 import android.os.Build
-import android.os.Handler
 import android.os.IBinder
-import android.os.Looper
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import dev.epegasus.servicesamples.MainActivity
 import dev.epegasus.servicesamples.R
 import dev.epegasus.servicesamples.TAG
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @Suppress("DEPRECATION")
-class MyForegroundService : Service() {
+class MyBoundService : Service() {
 
     private lateinit var notificationManager: NotificationManager
 
@@ -44,32 +47,12 @@ class MyForegroundService : Service() {
         notificationManager.createNotificationChannel(channel)
     }
 
-    /**
-     *  ANR can be generate if later than 5 seconds
-     *
-     *  @see
-     *         -> STOP_FOREGROUND_DETACH: Notification will remain after killing foreground service
-     *         -> STOP_FOREGROUND_REMOVE: Notification will be removed as well
-     */
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
-        Log.d(TAG, "onStartCommand: called")
 
         val builder = createNotification()
         startForeground(100, builder.build())
 
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            Log.d(TAG, "stopForeground: called")
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                stopForeground(STOP_FOREGROUND_REMOVE)
-            } else {
-                stopForeground(true)
-            }
-            stopSelf()
-        }, 60_000)
-
+        startWorking()
 
         return START_STICKY
     }
@@ -86,13 +69,50 @@ class MyForegroundService : Service() {
         return NotificationCompat.Builder(this, channelId).setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle("My notification").setContentText("Much longer text that cannot fit one line...").setStyle(bitTextStyle).setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pendingIntent)
     }
 
-    override fun onBind(intent: Intent): IBinder? {
+
+    /* -------------------------------------- Bound Logic -------------------------------------- */
+
+    private var counter = 0
+    private val binder = LocalBinder()
+
+    private fun startWorking() {
+        CoroutineScope(Dispatchers.IO).launch {
+            if (counter <= 100) {
+                Log.d(TAG, "startWorking: $counter")
+                counter++
+                delay(1000)
+                startWorking()
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    stopForeground(STOP_FOREGROUND_REMOVE)
+                } else {
+                    stopForeground(true)
+                }
+                stopSelf()
+            }
+        }
+    }
+
+    override fun onBind(intent: Intent): IBinder {
         Log.d(TAG, "onBind: called")
-        return null
+        return binder
+    }
+
+    override fun onRebind(intent: Intent?) {
+        super.onRebind(intent)
+        Log.d(TAG, "onRebind: called")
+    }
+
+    fun getCounter(): Int {
+        return counter
     }
 
     override fun onDestroy() {
         Log.d(TAG, "onDestroy: called")
         super.onDestroy()
+    }
+
+    inner class LocalBinder : Binder() {
+        fun getService(): MyBoundService = this@MyBoundService
     }
 }

@@ -41,7 +41,13 @@
         <!-- Foreground -->
         <service
             android:name=".services.foreground.MyForegroundService"
-            android:foregroundServiceType="location"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+
+        <!-- Bound -->
+        <service
+            android:name=".services.bound.MyBoundService"
             android:enabled="true"
             android:exported="false" />
     </application>
