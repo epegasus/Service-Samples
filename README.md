@@ -181,3 +181,46 @@
             android:name=".services.foreground.MyForegroundService"
             android:foregroundServiceType="location"
 		 />
+		 
+		 
+		 
+		 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+							 Bound Service
+
+### Definition
+
+	"A bound service is the server in a client-server interface. It allows components (such as activities) 
+	to bind to the service, send requests, receive responses, and perform interprocess communication (IPC).
+
+	-> It does not run in the background indefinitely.
+	-> It will remain until last component is bounded.
+	-> Beginning with Android 5.0 (API level 21), the system throws an exception if you call
+	   bindService() with an implicit intent.
+
+#### Creating a bounding Service
+
+	1) Extending the Binder class
+	2) Using a Messanger
+	3) Using AIDL
+
+### Types of Binding
+	
+	-> Local (Binder Class)
+	-> Remote (Messanger, AIDL)
+	
+### To bind to a service from your client, follow these steps:
+	
+	-> Implement ServiceConnection (Your implementation must override two callback methods)
+		- onServiceConnected()
+			The system calls this to deliver the IBinder returned by the service's onBind() method.
+		- onServiceDisconnected()
+			The Android system calls this when the connection to the service is unexpectedly lost,
+			such as when the service has crashed or has been killed.
+			This is not called when the client unbinds.
+		
+### To unbind a service from your client, call 
+	unbindService()
+	
