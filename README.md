@@ -181,3 +181,30 @@
             android:name=".services.foreground.MyForegroundService"
             android:foregroundServiceType="location"
 		 />
+		 
+		 
+		 
+		 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+							 Bound Service
+
+### Definition
+
+	"A bound service is the server in a client-server interface. It allows components (such as activities) 
+	to bind to the service, send requests, receive responses, and perform interprocess communication (IPC).
+
+	-> It does not run in the background indefinitely.
+	-> It will remain until last component is bounded.
+
+#### Creating a bounding Service
+
+	1) Extending the Binder class
+	2) Using a Messanger
+	3) Using AIDL
+
+### Types of Binding
+	
+	-> Local (Binder Class)
+	-> Remote (Messanger, AIDL)
